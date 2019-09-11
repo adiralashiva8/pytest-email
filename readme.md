@@ -11,7 +11,7 @@ Plugin to send email after execution with results.
 
 ### How it works:
 
- - Get execution details using  `pytest_terminal_summary`
+ - Get execution details using  `pytest_terminal_summary()`
  - Build html email template
  - Send's email for respective recipients
 
@@ -28,7 +28,7 @@ Plugin to send email after execution with results.
 
    > Case 2: Install from git (changes in master)
    ```
-   pip install git+https://github.com/adiralashiva8/robotframework-email
+   pip install git+https://github.com/adiralashiva8/pytest-email
    ```
 
 2. Execute test's normally using options
@@ -81,7 +81,7 @@ Future: Failed test information
 
 If you have any questions / suggestions / comments on this, please feel free to reach me at
 
- - Email: <a href="mailto:adiralashiva8@gmail.com?Subject=Robotframework%20Metrics" target="_blank">`adiralashiva8@gmail.com`</a> 
+ - Email: <a href="mailto:adiralashiva8@gmail.com?Subject=Pytest%20Email" target="_blank">`adiralashiva8@gmail.com`</a> 
  - LinkedIn: <a href="https://www.linkedin.com/in/shivaprasadadirala/" target="_blank">`shivaprasadadirala`</a>
  - Twitter: <a href="https://twitter.com/ShivaAdirala" target="_blank">`@ShivaAdirala`</a>
 
