@@ -37,9 +37,9 @@ Plugin to send email after execution with results.
     pytest --email_uname="test@gmail.com" --email_pwd="XXXXX" --email_to="test1@gmail.com,test2@gmail.com"
     ```
 
-    > By default email will be sent, users can restrict send email by using following command 
+    > By default send email is false, users need to enable send email by using following command 
     ```
-    pytest --email_send=False
+    pytest --email_send=True
     ```
 
     Email options:
@@ -53,6 +53,11 @@ Plugin to send email after execution with results.
     -> --email_send - Send email based on input
     ```
 
+    __USAGE__
+    ```
+    pytest --email_send=True --email_uname="test@gmail.com" --email_pwd="XXXXX" --email_to="test1@gmail.com,test2@gmail.com" --email_subject="ABC Project Execution"
+    --email_org="ABC Company"
+    ```
 ---
 
 *Sample Report*

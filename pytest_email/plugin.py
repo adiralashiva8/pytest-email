@@ -41,7 +41,7 @@ def pytest_addoption(parser):
         '--email_send',
         action='store',
         dest='email_send',
-        default="True",
+        default="False",
         help='Sends email when --email_send is True'
     )
 
