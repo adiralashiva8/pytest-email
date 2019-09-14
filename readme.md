@@ -11,8 +11,8 @@ Plugin to send email after execution with results.
 
 ### How it works:
 
- - Get execution details using  `pytest_terminal_summary()`
- - Build html email template
+ - Get execution details using  `pytest_terminal_summary()` hook
+ - Build html template
  - Send's email for respective recipients
 
 ---
@@ -34,29 +34,28 @@ Plugin to send email after execution with results.
 2. Execute test's normally using options
 
     ```
-    pytest --email_uname="test@gmail.com" --email_pwd="XXXXX" --email_to="test1@gmail.com,test2@gmail.com"
+    pytest --euname="test@gmail.com" --epwd="XXXXX" --eto="test1@gmail.com,test2@gmail.com"
     ```
 
     > By default send email is false, users need to enable send email by using following command 
     ```
-    pytest --email_send=True
+    pytest --esend=True
     ```
 
     Email options:
     ```
-    -> --email_uname - Email user name or id
-    -> --email_pwd - Email user password
-    -> --email_to - Recipients email ids
-    -> --email_smtp - Email server smtp
-    -> --email_subject - Email subject
-    -> --email_org - Organization name to include in email
-    -> --email_send - Send email based on input
+    -> --euname - Email user name or id
+    -> --epwd - Email user password
+    -> --eto - Recipients email ids
+    -> --esmtp - Email server smtp
+    -> --esubject - Email subject
+    -> --eorg - Organization name to include in email
+    -> --esend - Send email based on input
     ```
 
     __USAGE__
     ```
-    pytest --email_send=True --email_uname="test@gmail.com" --email_pwd="XXXXX" --email_to="test1@gmail.com,test2@gmail.com" --email_subject="ABC Project Execution"
-    --email_org="ABC Company"
+    pytest --esend=True --euname="test@gmail.com" --epwd="XXXXX" --eto="test1@gmail.com,test2@gmail.com" --esubject="ABC Project Execution" --eorg="MyCompany" --esmtp="smtp.xxxx.4578"
     ```
 ---
 

@@ -16,55 +16,55 @@ from email import encoders
 def pytest_addoption(parser):
     group = parser.getgroup('email')
     group.addoption(
-        '--email_uname',
+        '--euname',
         action='store',
-        dest='email_uname',
+        dest='euname',
         default=None,
-        help='Email id or username'
+        help='Email id'
     )
     group.addoption(
-        '--email_pwd',
+        '--epwd',
         action='store',
-        dest='email_pwd',
+        dest='epwd',
         default=None,
         help='Email password'
     )
     group.addoption(
-        '--email_to',
+        '--eto',
         action='store',
-        dest='email_to',
+        dest='eto',
         default=None,
         help='Email recipients'
     )
 
     group.addoption(
-        '--email_send',
+        '--esend',
         action='store',
-        dest='email_send',
+        dest='esend',
         default="False",
-        help='Sends email when --email_send is True'
+        help='Sends email when --esend is True'
     )
 
     group.addoption(
-        '--email_subject',
+        '--esubject',
         action='store',
-        dest='email_subject',
+        dest='esubject',
         default="Pytes Execution Result",
         help='Subject of email'
     )
 
     group.addoption(
-        '--email_org',
+        '--eorg',
         action='store',
-        dest='email_org',
+        dest='eorg',
         default="Pytest Email",
         help='Your organization name'
     )
 
     group.addoption(
-        '--email_smtp',
+        '--esmtp',
         action='store',
-        dest='email_smtp',
+        dest='esmtp',
         default="smtp.gmail.com:587",
         help='Email server smtp'
     )
@@ -89,14 +89,14 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
 
     total_tests = passed_tests + failed_tests + skipped_tests + error_tests + xfailed_tests + xpassed_tests
 
-    if config.option.email_send == "True":
+    if config.option.esend == "True":
 
-        send_email(str(config.option.email_subject),str(config.option.email_smtp),
-        str(config.option.email_uname),str(config.option.email_pwd),
-        str(config.option.email_to),str(total_tests),
+        send_email(str(config.option.esubject),str(config.option.esmtp),
+        str(config.option.euname),str(config.option.epwd),
+        str(config.option.eto),str(total_tests),
         str(passed_tests),str(failed_tests), str(skipped_tests),str(error_tests),
         str(xpassed_tests), str(xfailed_tests), str(round(passed_tests*100.0/total_tests,2)),
-        str(execution_date),str(round(duration,2)), str(config.option.email_org))
+        str(execution_date),str(round(duration,2)), str(config.option.eorg))
 
 def send_email(subject, smtp, from_user, pwd, to,
  total, passed, failed, skipped, error, xpassed, xfailed,
