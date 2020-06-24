@@ -95,13 +95,15 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
 
     total_tests = passed_tests + failed_tests + skipped_tests + error_tests + xfailed_tests + xpassed_tests
 
+    pass_percentage = 0 if total_tests == 0 else round(passed_tests*100.0/total_tests,2)
+
     if config.option.esend == "True":
 
         send_email(str(config.option.esubject),str(config.option.esmtp),
         str(config.option.euname),str(config.option.epwd),
         str(config.option.eto),str(total_tests),
         str(passed_tests),str(failed_tests), str(skipped_tests),str(error_tests),
-        str(xpassed_tests), str(xfailed_tests), str(round(passed_tests*100.0/total_tests,2)),
+        str(xpassed_tests), str(xfailed_tests), str(pass_percentage),
         str(execution_date),str(round(duration,2)), str(config.option.eorg), not config.option.eanon)
 
 def send_email(subject, smtp, from_user, pwd, to,
@@ -115,7 +117,6 @@ def send_email(subject, smtp, from_user, pwd, to,
 
     msg['From'] = from_user
     msg['To'] = to
-    to_addrs = [to]
     msg.add_header('Content-Type', 'text/html')
 
     email_content = """
@@ -264,4 +265,4 @@ def send_email(subject, smtp, from_user, pwd, to,
     server.starttls()
     if use_auth:
         server.login(msg['From'], pwd)
-    server.sendmail(from_user, to_addrs, msg.as_string())
+    server.send_message(msg)
