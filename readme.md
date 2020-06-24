@@ -58,6 +58,7 @@ Plugin to send email after execution with results.
     -> --esubject - Email subject
     -> --eorg - Organization name to include in email
     -> --esend - Send email based on input
+    -> --eanon - Do not use SMTP auth
     ```
 
     __USAGE__

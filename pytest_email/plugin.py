@@ -69,6 +69,12 @@ def pytest_addoption(parser):
         help='Email server smtp'
     )
 
+    group.addoption(
+        '--eanon',
+        action='store_true',
+        help='Do not use SMTP AUTH'
+    )
+
 execution_date = "Today"
 
 def pytest_sessionstart(session):
@@ -96,11 +102,11 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
         str(config.option.eto),str(total_tests),
         str(passed_tests),str(failed_tests), str(skipped_tests),str(error_tests),
         str(xpassed_tests), str(xfailed_tests), str(round(passed_tests*100.0/total_tests,2)),
-        str(execution_date),str(round(duration,2)), str(config.option.eorg))
+        str(execution_date),str(round(duration,2)), str(config.option.eorg), not config.option.eanon)
 
 def send_email(subject, smtp, from_user, pwd, to,
  total, passed, failed, skipped, error, xpassed, xfailed,
-  percentage, exe_date, elapsed_time, company_name):
+  percentage, exe_date, elapsed_time, company_name, use_auth):
 
     server = smtplib.SMTP(smtp)
 
@@ -256,5 +262,6 @@ def send_email(subject, smtp, from_user, pwd, to,
     msg.attach(MIMEText(email_content, 'html'))
 
     server.starttls()
-    server.login(msg['From'], pwd)
+    if use_auth:
+        server.login(msg['From'], pwd)
     server.sendmail(from_user, to_addrs, msg.as_string())
