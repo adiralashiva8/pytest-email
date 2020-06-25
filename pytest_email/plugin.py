@@ -34,7 +34,7 @@ def pytest_addoption(parser):
         action='store',
         dest='efrom',
         default=None,
-        help='Email sender'
+        help='Email sender (if missing will use euname)'
     )
     group.addoption(
         '--eto',
@@ -118,6 +118,10 @@ def send_email(subject, smtp, user, pwd, efrom, to,
   percentage, exe_date, elapsed_time, company_name, use_auth):
 
     server = smtplib.SMTP(smtp)
+
+    # backward compatibility
+    if !efrom:
+        efrom = user
 
     msg = MIMEMultipart()
     msg['Subject'] = subject
