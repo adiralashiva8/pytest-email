@@ -20,7 +20,7 @@ def pytest_addoption(parser):
         action='store',
         dest='euname',
         default=None,
-        help='Email id'
+        help='Email id (for auth)'
     )
     group.addoption(
         '--epwd',
@@ -28,6 +28,13 @@ def pytest_addoption(parser):
         dest='epwd',
         default=None,
         help='Email password'
+    )
+    group.addoption(
+        '--efrom',
+        action='store',
+        dest='efrom',
+        default=None,
+        help='Email sender'
     )
     group.addoption(
         '--eto',
@@ -101,12 +108,12 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
 
         send_email(str(config.option.esubject),str(config.option.esmtp),
         str(config.option.euname),str(config.option.epwd),
-        str(config.option.eto),str(total_tests),
+        str(config.option.efrom),str(config.option.eto),str(total_tests),
         str(passed_tests),str(failed_tests), str(skipped_tests),str(error_tests),
         str(xpassed_tests), str(xfailed_tests), str(pass_percentage),
         str(execution_date),str(round(duration,2)), str(config.option.eorg), not config.option.eanon)
 
-def send_email(subject, smtp, from_user, pwd, to,
+def send_email(subject, smtp, user, pwd, efrom, to,
  total, passed, failed, skipped, error, xpassed, xfailed,
   percentage, exe_date, elapsed_time, company_name, use_auth):
 
@@ -115,9 +122,9 @@ def send_email(subject, smtp, from_user, pwd, to,
     msg = MIMEMultipart()
     msg['Subject'] = subject
 
-    msg['From'] = from_user
+    msg['From'] = efrom
     msg['To'] = to
-    msg.add_header('Content-Type', 'text/html')
+    #msg.add_header('Content-Type', 'text/html')
 
     email_content = """
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
@@ -264,5 +271,5 @@ def send_email(subject, smtp, from_user, pwd, to,
 
     server.starttls()
     if use_auth:
-        server.login(msg['From'], pwd)
+        server.login(user, pwd)
     server.send_message(msg)
