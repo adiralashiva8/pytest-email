@@ -120,7 +120,7 @@ def send_email(subject, smtp, user, pwd, efrom, to,
     server = smtplib.SMTP(smtp)
 
     # backward compatibility
-    if !efrom:
+    if not efrom:
         efrom = user
 
     msg = MIMEMultipart()
