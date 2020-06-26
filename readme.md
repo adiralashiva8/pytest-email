@@ -41,7 +41,7 @@ Plugin to send email after execution with results.
 2. Execute test's normally using options
 
     ```
-    pytest --euname="test@gmail.com" --epwd="XXXXX" --eto="test1@gmail.com,test2@gmail.com"
+    pytest --euname="username" --epwd="XXXXX" --efrom="from@gmail.com" --eto="test1@gmail.com,test2@gmail.com"
     ```
 
     > By default send email is false, users need to enable send email by using following command 
@@ -51,8 +51,9 @@ Plugin to send email after execution with results.
 
     Email options:
     ```
-    -> --euname - Email user name or id
+    -> --euname - Email user name or id (for auth)
     -> --epwd - Email user password
+    -> --efrom - sender email id
     -> --eto - Recipients email ids
     -> --esmtp - Email server smtp
     -> --esubject - Email subject
