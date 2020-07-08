@@ -28,7 +28,7 @@ setup(
     packages=find_packages(include=['pytest_email']),
     setup_requires=setup_requirements,
     url='https://github.com/adiralashiva8/pytest-email',
-    version='0.1',
+    version='0.3',
     zip_safe=True,
     install_requires=[
         'pytest',
